@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "repo": "ContentiousGatherings/elsa-reviewer",
+  "releases_url": "https://github.com/ContentiousGatherings/elsa/releases",
+  "comment_max": 500,
+  "targets": {
+    "authoritative_event": {
+      "label": "gathering",
+      "problems": ["exclude", "wrong_date", "wrong_place", "wrong_type", "duplicate", "other"]
+    },
+    "event": {
+      "label": "newspaper report",
+      "problems": ["exclude", "wrong_match", "wrong_date", "wrong_place", "wrong_type", "other"]
+    },
+    "actor": {
+      "label": "actor",
+      "problems": ["wrong_actor", "other"]
+    }
+  },
+  "problems": {
+    "exclude": "Should not be included",
+    "wrong_date": "The date is wrong",
+    "wrong_place": "The place is wrong",
+    "wrong_type": "The type of gathering is wrong",
+    "duplicate": "Same gathering as another entry",
+    "wrong_match": "Describes a different gathering",
+    "wrong_actor": "Not a participant, or the wrong name",
+    "other": "Something else"
+  },
+  "reasons": {
+    "abroad": "Took place outside Sweden",
+    "internal": "Internal meeting (members or board)",
+    "strike": "Strike or lockout",
+    "not_gathering": "Not a gathering",
+    "no_place": "No place given",
+    "no_time": "No time given",
+    "announcement": "Only announced or planned",
+    "other": "Other reason"
+  }
+}

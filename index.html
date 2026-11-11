@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elsa reviewer</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<header class="bar">
+  <h1>Elsa reviewer</h1>
+  <span id="file-label" class="muted"></span>
+  <span class="spacer"></span>
+  <button id="open-basket" class="secondary" hidden>My reports (<span id="basket-count">0</span>)</button>
+  <button id="open-other" class="secondary" hidden>Open another file</button>
+</header>
+
+<main>
+  <section id="start" class="start">
+    <h2>Review gatherings found in the newspapers</h2>
+    <ol class="steps">
+      <li><strong>Download an export file</strong> from the
+        <a id="releases-link" target="_blank" rel="noopener">elsa releases page</a>
+        (you need to be logged in to GitHub). Smaller files, such as one newspaper or one decade, open fastest.</li>
+      <li><strong>Open it here.</strong> The file stays on your computer. Large files can take a minute or two, so please be patient.</li>
+      <li><strong>Browse and report.</strong> When something is wrong, press <em>Report a problem</em> and say what is wrong in a few words.</li>
+      <li><strong>Send your reports.</strong> Press <em>My reports</em>, then <em>Send to GitHub</em>. GitHub opens; log in if asked and follow the steps there. A colleague reviews your reports before they are used.</li>
+    </ol>
+    <label id="drop" class="drop">
+      <input id="file-input" type="file" accept=".zip,.tsv">
+      <span><strong>Choose an export file</strong> or drop it here<br><span class="muted">elsa_export_….tsv.zip</span></span>
+    </label>
+    <div id="progress" class="progress" hidden>
+      <div class="progress-track"><div id="progress-fill"></div></div>
+      <p id="progress-text" class="muted"></p>
+    </div>
+    <p id="load-error" class="error" hidden></p>
+  </section>
+
+  <section id="browse" class="browse" hidden>
+    <aside class="filters">
+      <label>Search <input id="f-search" type="search" placeholder="Place, type, actor, newspaper"></label>
+      <label class="check"><input id="f-text" type="checkbox"> Also search the newspaper text (slower)</label>
+      <label>Newspaper <select id="f-journal"></select></label>
+      <label>Type of gathering <select id="f-type"></select></label>
+      <label>County <select id="f-county"></select></label>
+      <div class="years">
+        <label>From year <input id="f-from" type="number" inputmode="numeric"></label>
+        <label>To year <input id="f-to" type="number" inputmode="numeric"></label>
+      </div>
+      <label class="check"><input id="f-reported" type="checkbox"> Show gatherings already reported as not to be included</label>
+      <button id="f-clear" class="link">Clear filters</button>
+    </aside>
+    <div class="list-pane">
+      <p id="list-count" class="muted"></p>
+      <ul id="list" class="list"></ul>
+      <div class="pager">
+        <button id="prev" class="secondary">Previous</button>
+        <span id="page-label" class="muted"></span>
+        <button id="next" class="secondary">Next</button>
+      </div>
+    </div>
+    <article id="detail" class="detail">
+      <p class="muted">Choose a gathering from the list to see the newspaper reports behind it.</p>
+    </article>
+  </section>
+</main>
+
+<dialog id="report-dialog">
+  <form method="dialog" id="report-form">
+    <h3 id="report-title"></h3>
+    <p id="report-subject" class="muted"></p>
+    <fieldset id="report-problems"></fieldset>
+    <label id="report-reason-wrap">Why? <select id="report-reason"></select></label>
+    <label>In a few words (optional; you may quote the text)
+      <textarea id="report-comment" rows="3" maxlength="500"></textarea>
+    </label>
+    <div class="actions">
+      <button value="cancel" class="secondary" formnovalidate>Cancel</button>
+      <button id="report-add" value="add">Add to my reports</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="basket-dialog">
+  <form method="dialog">
+    <h3>My reports</h3>
+    <ul id="basket-list" class="basket"></ul>
+    <div id="send-help" class="help">
+      <p><strong>Send to GitHub</strong> opens GitHub in a new tab with your reports filled in.</p>
+      <ol>
+        <li>Log in to GitHub if asked.</li>
+        <li>Press the green <em>Commit changes…</em> button, then <em>Propose changes</em>.</li>
+        <li>On the next page press <em>Create pull request</em>.</li>
+      </ol>
+      <p>A colleague then reviews your reports.</p>
+    </div>
+    <div id="sent-confirm" class="help" hidden>
+      <p>Did GitHub show <em>Create pull request</em> and did you press it?</p>
+      <div class="actions">
+        <button type="button" id="sent-no" class="secondary">Not yet</button>
+        <button type="button" id="sent-yes">Yes, remove the sent reports</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button value="close" class="secondary">Close</button>
+      <button type="button" id="send">Send to GitHub</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>
