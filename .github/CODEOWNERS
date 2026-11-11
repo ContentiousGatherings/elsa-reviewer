@@ -1,0 +1,5 @@
+# Changes to the page itself go to the maintainer; report files go to
+# the reviewers team, whose code review settings pick the member.
+# The last matching line wins.
+* @mathjoha
+/reports/ @ContentiousGatherings/reviewers
