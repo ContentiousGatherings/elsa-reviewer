@@ -1,0 +1,13 @@
+name: Suggest an improvement
+description: Ideas and problems with the reviewer page itself (not with the data).
+title: "Suggestion: "
+labels: ["enhancement"]
+assignees: ["mathjoha"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would make the page better?
+      description: What did you try to do, and what got in the way? Screenshots are welcome (paste or drag them in).
+    validations:
+      required: true

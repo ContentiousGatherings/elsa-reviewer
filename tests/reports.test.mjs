@@ -94,3 +94,11 @@ test("exclusion: the gathering, or all of its reports", () => {
   assert.equal(isExcluded(index, ev(8, [80, 81])), false);
   assert.equal(reportCount(index, ev(8, [80, 81])), 2);
 });
+
+test("downloaded report files are dated", async () => {
+  const { downloadName } = await import("../js/reports.js");
+  assert.equal(
+    downloadName(new Date("2026-11-11T10:00:00Z")),
+    "elsa-reports-2026-11-11.jsonl",
+  );
+});

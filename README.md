@@ -16,6 +16,10 @@ newspapers, and reporting what is wrong with them.
 4. Press **My reports**, then **Send to GitHub**. GitHub opens with your
    reports filled in as a new file; log in if asked, press
    **Commit changes…** / **Propose changes**, then **Create pull request**.
+   Or press **Download as a file** and e-mail the file to the project.
+
+**Suggest an improvement** (top right) opens a GitHub issue for ideas and
+problems with the page itself; it is assigned to the maintainer.
 
 ## Reviewing reports
 
@@ -26,6 +30,9 @@ file it came from) is published next to the page:
 <https://contentiousgatherings.github.io/elsa-reviewer/blocklist.jsonl>.
 The page hides gatherings reported as *should not be included* (there is a
 switch to show them), and elsa reads the same list when it builds exports.
+
+Reports that arrive by e-mail (`elsa-reports-<date>.jsonl`) go in the same
+way: add the file to `reports/` under a new name in a pull request.
 
 ## Report format
 

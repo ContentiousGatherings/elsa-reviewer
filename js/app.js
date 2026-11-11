@@ -1,5 +1,6 @@
 import { EventStore, TsvParser, releaseFromFileName } from "./tsv.js";
 import {
+  downloadName,
   indexReports,
   isExcluded,
   makeRecord,
@@ -43,6 +44,8 @@ const state = {
 async function init() {
   state.schema = await (await fetch("schema.json")).json();
   $("releases-link").href = state.schema.releases_url;
+  $("suggest").href =
+    `https://github.com/${state.schema.repo}/issues/new?template=improvement.yml`;
   await loadBlocklist();
   updateBasket();
   wireStart();
@@ -498,8 +501,30 @@ function wireDialogs() {
     if (!url) return;
     state.sending = count;
     window.open(url, "_blank", "noopener");
-    $("sent-confirm").hidden = false;
+    const rest = state.basket.length - count;
+    askToRemove(
+      "Did GitHub show <em>Create pull request</em> and did you press it?" +
+        (rest ? ` (${rest} more report${rest > 1 ? "s" : ""} will need another send.)` : ""),
+    );
   });
+  $("download").addEventListener("click", () => {
+    const records = state.basket.map((b) => b.record);
+    const text = records.map((r) => JSON.stringify(r)).join("\n") + "\n";
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
+    link.download = downloadName();
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    state.sending = records.length;
+    askToRemove(
+      `Saved as <em>${esc(link.download)}</em> in your downloads. ` +
+        "Attach it to an e-mail to the project. Remove these reports from the list?",
+    );
+  });
+  function askToRemove(question) {
+    $("sent-question").innerHTML = question;
+    $("sent-confirm").hidden = false;
+  }
   $("sent-no").addEventListener("click", () => {
     $("sent-confirm").hidden = true;
   });
@@ -527,7 +552,9 @@ function renderBasket() {
         .join("")
     : `<li class="muted">No reports yet.</li>`;
   $("send").disabled = !items.length;
+  $("download").disabled = !items.length;
   $("send-help").hidden = !items.length;
+  $("download-help").hidden = !items.length;
 }
 
 function loadBasket() {

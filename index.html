@@ -12,6 +12,7 @@
   <h1>Elsa reviewer</h1>
   <span id="file-label" class="muted"></span>
   <span class="spacer"></span>
+  <a id="suggest" class="button secondary" target="_blank" rel="noopener">Suggest an improvement</a>
   <button id="open-basket" class="secondary" hidden>My reports (<span id="basket-count">0</span>)</button>
   <button id="open-other" class="secondary" hidden>Open another file</button>
 </header>
@@ -96,15 +97,17 @@
       </ol>
       <p>A colleague then reviews your reports.</p>
     </div>
+    <p id="download-help" class="muted">You can also <strong>download</strong> your reports as a file and e-mail it to the project instead.</p>
     <div id="sent-confirm" class="help" hidden>
-      <p>Did GitHub show <em>Create pull request</em> and did you press it?</p>
+      <p id="sent-question"></p>
       <div class="actions">
         <button type="button" id="sent-no" class="secondary">Not yet</button>
-        <button type="button" id="sent-yes">Yes, remove the sent reports</button>
+        <button type="button" id="sent-yes">Yes, remove them</button>
       </div>
     </div>
     <div class="actions">
       <button value="close" class="secondary">Close</button>
+      <button type="button" id="download" class="secondary">Download as a file</button>
       <button type="button" id="send">Send to GitHub</button>
     </div>
   </form>

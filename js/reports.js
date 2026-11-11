@@ -30,6 +30,10 @@ export function reportFileName(now = new Date(), random = Math.random) {
   return `reports/${day}-${tag}.jsonl`;
 }
 
+export function downloadName(now = new Date()) {
+  return `elsa-reports-${now.toISOString().slice(0, 10)}.jsonl`;
+}
+
 export function newFileUrl(repo, path, content) {
   const q = (s) => encodeURIComponent(s);
   return `https://github.com/${repo}/new/main?filename=${q(path)}&value=${q(content)}`;
